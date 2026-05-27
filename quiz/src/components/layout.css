@@ -1,0 +1,434 @@
+/* =========================
+   LAYOUT VARIABLES
+========================= */
+.layout {
+  --layout-bg: #f7f9ff;
+  --layout-bg-soft: #eef4ff;
+  --layout-line: #dce5f4;
+
+  --layout-surface: #ffffff;
+  --layout-surface-soft: #f8fbff;
+
+  --layout-ink: #14213d;
+  --layout-muted: #607089;
+
+  --layout-primary: #6366f1;
+  --layout-secondary: #06b6d4;
+  --layout-accent: #8b5cf6;
+
+  --layout-shadow: 0 18px 50px rgba(30, 41, 59, 0.1);
+}
+
+/* =========================
+   DARK MODE VARIABLES
+========================= */
+body[data-theme="dark"] .layout {
+  --layout-bg: #050816;
+  --layout-bg-soft: #0f172a;
+  --layout-line: #26354f;
+
+  --layout-surface: #111c32;
+  --layout-surface-soft: #17233a;
+
+  --layout-ink: #e5edf9;
+  --layout-muted: #9fb0c8;
+
+  --layout-primary: #818cf8;
+  --layout-secondary: #22d3ee;
+  --layout-accent: #a78bfa;
+
+  --layout-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+/* =========================
+   LOCAL RESET
+========================= */
+.layout,
+.layout *,
+.layout *::before,
+.layout *::after {
+  box-sizing: border-box;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+
+  color: var(--layout-ink);
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(99, 102, 241, 0.12),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(6, 182, 212, 0.1),
+      transparent 24%
+    ),
+    linear-gradient(
+      135deg,
+      var(--layout-surface-soft) 0%,
+      var(--layout-bg-soft) 54%,
+      var(--layout-bg) 100%
+    );
+}
+
+body[data-theme="dark"] .layout {
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(99, 102, 241, 0.18),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(6, 182, 212, 0.13),
+      transparent 24%
+    ),
+    linear-gradient(
+      135deg,
+      var(--layout-bg) 0%,
+      var(--layout-surface) 54%,
+      var(--layout-bg-soft) 100%
+    );
+}
+
+/* =========================
+   SIDEBAR FIXED
+========================= */
+.layout .sidebar {
+  flex: 0 0 240px;
+  width: 240px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  height: 100vh;
+  z-index: 40;
+
+  overflow: hidden;
+}
+
+/* =========================
+   MAIN AREA
+========================= */
+.layout .main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  min-height: 100vh;
+  min-width: 0;
+
+  width: calc(100% - 240px);
+  margin-left: 240px;
+}
+
+/* =========================
+   NAVBAR FIX
+========================= */
+.layout .navbar,
+.layout .q-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+
+  width: 100%;
+
+  background: #ffffff;
+  border-bottom: 1px solid var(--layout-line);
+}
+
+body[data-theme="dark"] .layout .navbar,
+body[data-theme="dark"] .layout .q-navbar {
+  background: #111c32;
+  border-bottom-color: var(--layout-line);
+}
+
+/* =========================
+   CONTENT
+========================= */
+.layout .content {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.layout .page-container {
+  width: 100%;
+  min-height: calc(100vh - 96px);
+
+  color: var(--layout-ink);
+}
+
+/* =========================
+   SCOPED CARD FIX
+   Only dashboard pages
+========================= */
+.layout .card,
+.layout .student-hero,
+.layout .teacher-card,
+.layout .stat-card,
+.layout .student-card,
+.layout .sidebar-card,
+.layout .question-box,
+.layout .empty-state,
+.layout .quiz-select,
+.layout .quiz-attempt,
+.layout .subject-panel,
+.layout .question-card,
+.layout .result-card,
+.layout .results-hero,
+.layout .leaderboard-hero,
+.layout .filter-bar,
+.layout .podium-card,
+.layout .leaderboard-table,
+.layout .chart-box,
+.layout .settings-hero,
+.layout .settings-card,
+.layout .settings-panel,
+.layout .profile-card,
+.layout .summary-card,
+.layout .activity-card {
+  background: var(--layout-surface);
+  color: var(--layout-ink);
+
+  border: 1px solid var(--layout-line);
+  border-radius: 14px;
+
+  box-shadow: var(--layout-shadow);
+}
+
+body[data-theme="dark"] .layout .card,
+body[data-theme="dark"] .layout .student-hero,
+body[data-theme="dark"] .layout .teacher-card,
+body[data-theme="dark"] .layout .stat-card,
+body[data-theme="dark"] .layout .student-card,
+body[data-theme="dark"] .layout .sidebar-card,
+body[data-theme="dark"] .layout .question-box,
+body[data-theme="dark"] .layout .empty-state,
+body[data-theme="dark"] .layout .quiz-select,
+body[data-theme="dark"] .layout .quiz-attempt,
+body[data-theme="dark"] .layout .subject-panel,
+body[data-theme="dark"] .layout .question-card,
+body[data-theme="dark"] .layout .result-card,
+body[data-theme="dark"] .layout .results-hero,
+body[data-theme="dark"] .layout .leaderboard-hero,
+body[data-theme="dark"] .layout .filter-bar,
+body[data-theme="dark"] .layout .podium-card,
+body[data-theme="dark"] .layout .leaderboard-table,
+body[data-theme="dark"] .layout .chart-box,
+body[data-theme="dark"] .layout .settings-hero,
+body[data-theme="dark"] .layout .settings-card,
+body[data-theme="dark"] .layout .settings-panel,
+body[data-theme="dark"] .layout .profile-card,
+body[data-theme="dark"] .layout .summary-card,
+body[data-theme="dark"] .layout .activity-card {
+  background: rgba(17, 28, 50, 0.92);
+  color: var(--layout-ink);
+
+  border-color: var(--layout-line);
+  box-shadow: var(--layout-shadow);
+}
+
+/* =========================
+   TEXT FIX
+========================= */
+.layout h1,
+.layout h2,
+.layout h3,
+.layout h4,
+.layout h5,
+.layout h6 {
+  color: var(--layout-ink);
+}
+
+.layout p,
+.layout span,
+.layout label,
+.layout small {
+  color: inherit;
+}
+
+.layout .muted,
+.layout .subtitle,
+.layout .helper-text,
+.layout .card p,
+.layout .student-card p,
+.layout .result-card p,
+.layout .settings-card p {
+  color: var(--layout-muted);
+}
+
+/* =========================
+   INPUTS FIX
+========================= */
+.layout input,
+.layout select,
+.layout textarea {
+  border: 1px solid var(--layout-line);
+  background: #ffffff;
+  color: var(--layout-ink);
+
+  outline: none;
+}
+
+.layout input::placeholder,
+.layout textarea::placeholder {
+  color: var(--layout-muted);
+}
+
+.layout input:focus,
+.layout select:focus,
+.layout textarea:focus {
+  border-color: rgba(37, 99, 235, 0.55);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+body[data-theme="dark"] .layout input,
+body[data-theme="dark"] .layout select,
+body[data-theme="dark"] .layout textarea {
+  background: #0f172a;
+  color: var(--layout-ink);
+  border-color: var(--layout-line);
+}
+
+body[data-theme="dark"] .layout input::placeholder,
+body[data-theme="dark"] .layout textarea::placeholder {
+  color: var(--layout-muted);
+}
+
+body[data-theme="dark"] .layout select option {
+  background: #0f172a;
+  color: var(--layout-ink);
+}
+
+/* =========================
+   BUTTONS FIX
+========================= */
+.layout button {
+  cursor: pointer;
+}
+
+.layout button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* =========================
+   TABLE FIX
+========================= */
+.layout .table-head,
+.layout .table-row {
+  border-bottom: 1px solid var(--layout-line);
+}
+
+body[data-theme="dark"] .layout .table-head,
+body[data-theme="dark"] .layout .table-row {
+  border-color: var(--layout-line);
+}
+
+.layout .table-head span,
+.layout .table-row span {
+  color: var(--layout-ink);
+}
+
+body[data-theme="dark"] .layout .table-head span,
+body[data-theme="dark"] .layout .table-row span {
+  color: var(--layout-ink);
+}
+
+/* =========================
+   SIDEBAR ICON FIX ONLY
+========================= */
+.layout .sidebar .icon {
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--layout-muted);
+}
+
+body[data-theme="dark"] .layout .sidebar .icon {
+  background: #17233a;
+  color: var(--layout-muted);
+}
+
+.layout .sidebar .menu-item.active .icon {
+  background: #ffffff;
+  color: var(--layout-primary);
+}
+
+body[data-theme="dark"] .layout .sidebar .menu-item.active .icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* =========================
+   RECHARTS DARK FIX
+========================= */
+body[data-theme="dark"] .layout .recharts-cartesian-axis-tick-value,
+body[data-theme="dark"] .layout .recharts-text {
+  fill: var(--layout-ink);
+}
+
+body[data-theme="dark"] .layout .recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   SCROLLBAR SCOPED
+========================= */
+.layout .content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.layout .content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.layout .content::-webkit-scrollbar-thumb {
+  background: rgba(96, 112, 137, 0.35);
+  border-radius: 999px;
+}
+
+body[data-theme="dark"] .layout .content::-webkit-scrollbar-thumb {
+  background: rgba(159, 176, 200, 0.28);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 860px) {
+  .layout {
+    display: block;
+  }
+
+  .layout .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+
+    flex: none;
+
+    overflow: visible;
+  }
+
+  .layout .main {
+    width: 100%;
+    margin-left: 0;
+    min-height: 100vh;
+  }
+
+  .layout .content {
+    padding: 18px;
+  }
+}
