@@ -221,6 +221,21 @@ body[data-theme="light"] .home-container {
   gap: 34px;
 }
 
+.home-container .home-menu-btn {
+  display: none;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--home-border);
+  border-radius: 16px;
+  background: var(--home-glass);
+  color: var(--home-text);
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
 .home-container .nav-links a,
 .home-container .contact-nav-btn {
   color: var(--home-text);
@@ -272,6 +287,10 @@ body[data-theme="light"] .home-container {
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+.home-container .menu-auth-group {
+  display: none;
 }
 
 .home-container .theme-toggle-btn,
@@ -1001,41 +1020,6 @@ body[data-theme="light"] .home-container {
   color: var(--home-heading);
 }
 
-.home-container .floating-icon {
-  position: absolute;
-
-  width: 54px;
-  height: 54px;
-
-  border-radius: 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--home-glass);
-  border: 1px solid var(--home-border);
-
-  color: var(--home-text);
-
-  animation: homeFloatCard 5s infinite ease-in-out;
-}
-
-.home-container .crown {
-  top: 30px;
-  right: 30px;
-}
-
-.home-container .medal {
-  bottom: 40px;
-  left: 30px;
-}
-
-.home-container .star {
-  top: 50%;
-  right: 50%;
-}
-
 .home-container .chart-area {
   display: flex;
   align-items: flex-end;
@@ -1367,23 +1351,68 @@ body[data-theme="light"] .home-container {
     padding: 20px;
   }
 
+  .home-container .home-menu-btn {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
   .home-container .nav-links {
+    order: 3;
+    width: 100%;
+    display: none;
+    padding: 20px;
+    border: 1px solid var(--home-border);
+    border-radius: 18px;
+    background: var(--home-glass);
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .home-container .nav-links.open {
+    display: grid;
+  }
+
+  .home-container .nav-links a,
+  .home-container .contact-nav-btn {
+    min-height: 46px;
+    padding: 0 14px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .home-container .nav-links a:hover,
+  .home-container .contact-nav-btn:hover {
+    background: rgba(99, 102, 241, 0.12);
+  }
+
+  .home-container .nav-links a::after,
+  .home-container .contact-nav-btn::after {
     display: none;
   }
 
   .home-container .auth-buttons {
-    width: 100%;
+    display: none !important;
+  }
+
+  .home-container .menu-auth-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--home-border);
   }
 
-  .home-container .theme-toggle-btn {
+  .home-container .menu-auth-group .theme-toggle-btn {
     grid-column: 1 / -1;
+    width: 100%;
   }
 
-  .home-container .theme-toggle-btn,
-  .home-container .login-btn,
-  .home-container .register-btn {
+  .home-container .menu-auth-group .login-btn,
+  .home-container .menu-auth-group .register-btn {
     width: 100%;
   }
 
@@ -1440,6 +1469,48 @@ body[data-theme="light"] .home-container {
 
   .home-container .footer-links {
     justify-content: center;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .home-container .home-menu-btn {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .home-container .nav-links {
+    order: 3;
+    width: 100%;
+    display: none;
+    padding: 20px;
+    border: 1px solid var(--home-border);
+    border-radius: 18px;
+    background: var(--home-glass);
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .home-container .nav-links.open {
+    display: grid;
+  }
+
+  .home-container .auth-buttons {
+    display: none !important;
+  }
+
+  .home-container .menu-auth-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--home-border);
+  }
+
+  .home-container .menu-auth-group .theme-toggle-btn {
+    grid-column: 1 / -1;
+    width: 100%;
   }
 }
 

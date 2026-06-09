@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import Navbar from "./nav";
-import Sidebar from "./Sidebar";
+import Sidebar from "./sidebar";
+import MobileBottomNav from "./MobileBottomNav";
+import PomodoroTimer from "./PomodoroTimer";
 import "./layout.css";
 
 export default function Layout({ children, logout }) {
@@ -16,7 +18,10 @@ export default function Layout({ children, logout }) {
       <div className="main">
         <Navbar logout={logout} />
         <main className="content">{children}</main>
+        <MobileBottomNav />
       </div>
+
+      <PomodoroTimer />
     </div>
   );
 }

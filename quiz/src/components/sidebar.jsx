@@ -6,8 +6,13 @@ import {
   FaCog,
   FaHome,
   FaTrophy,
+  FaClone,
+  FaBookmark,
+  FaUsers,
+  FaCalendarAlt,
+  FaLightbulb,
 } from "react-icons/fa";
-import { Sparkles } from "lucide-react";
+import { Sparkles, FileText, TrendingUp, AlertTriangle, Flame, Sigma, ClipboardList, StickyNote } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   PROFILE_UPDATED_EVENT,
@@ -50,7 +55,7 @@ export default function Sidebar() {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/profile/${user._id}`
+        `/api/profile/${user._id}`
       );
 
       const profile = res.data;
@@ -111,6 +116,22 @@ export default function Sidebar() {
       path: quizPath,
       icon: <FaBook />,
     },
+    ...(role === "student"
+      ? [
+          { name: "Mock Test", path: "/mock-test", icon: <FileText size={14} /> },
+          { name: "Doubt Solver", path: "/doubt-solver", icon: <FaLightbulb /> },
+          { name: "Flashcards", path: "/flashcards", icon: <FaClone /> },
+          { name: "Study Plan", path: "/study-plan", icon: <FaCalendarAlt /> },
+          { name: "Study Groups", path: "/study-groups", icon: <FaUsers /> },
+          { name: "Bookmarks", path: "/bookmarks", icon: <FaBookmark /> },
+          { name: "Progress", path: "/progress", icon: <TrendingUp size={14} /> },
+          { name: "Weak Spots", path: "/weakness-detector", icon: <AlertTriangle size={14} /> },
+          { name: "Daily Challenge", path: "/daily-challenge", icon: <Flame size={14} /> },
+          { name: "Formula Sheet", path: "/formula-sheet", icon: <Sigma size={14} /> },
+          { name: "Assignments", path: "/assignments", icon: <ClipboardList size={14} /> },
+          { name: "Smart Notes", path: "/notes", icon: <StickyNote size={14} /> },
+        ]
+      : []),
     {
       name: role === "teacher" ? "Student Results" : "Results",
       path: resultPath,
@@ -130,11 +151,9 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar">
-      {/* Background glow effects */}
       <div className="quiz-side-glow quiz-side-glow-one"></div>
       <div className="quiz-side-glow quiz-side-glow-two"></div>
 
-      {/* Brand / Logo */}
       <button
         className="quiz-side-brand"
         onClick={() => navigate(dashboardPath)}
@@ -150,7 +169,6 @@ export default function Sidebar() {
         </span>
       </button>
 
-      {/* User Info */}
       <div className="quiz-side-user">
         <div className="quiz-side-avatar">
           {avatar ? (
@@ -166,7 +184,6 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Navigation */}
       <nav className="quiz-side-menu" aria-label="Sidebar navigation">
         {menu.map((item) => (
           <button

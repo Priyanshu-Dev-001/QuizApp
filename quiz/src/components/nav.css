@@ -124,7 +124,8 @@ body[data-theme="light"] .q-profile-panel-glow {
 }
 
 .q-theme-btn,
-.q-logout-btn {
+.q-logout-btn,
+.q-install-btn {
   min-height: 54px;
 
   border: 1px solid var(--nav-border);
@@ -150,7 +151,8 @@ body[data-theme="light"] .q-profile-panel-glow {
     box-shadow 0.25s ease;
 }
 
-.q-theme-btn {
+.q-theme-btn,
+.q-install-btn {
   background: var(--nav-card);
 }
 
@@ -162,7 +164,8 @@ body[data-theme="light"] .q-profile-panel-glow {
 }
 
 .q-theme-btn:hover,
-.q-logout-btn:hover {
+.q-logout-btn:hover,
+.q-install-btn:hover {
   transform: translateY(-3px);
   border-color: rgba(99, 102, 241, 0.4);
   box-shadow: var(--nav-shadow);
@@ -616,7 +619,8 @@ body[data-theme="light"] .q-profile-form textarea {
   }
 
   .q-theme-btn,
-  .q-logout-btn {
+  .q-logout-btn,
+  .q-install-btn {
     min-height: 46px;
     padding: 0 14px;
   }
@@ -637,12 +641,14 @@ body[data-theme="light"] .q-profile-form textarea {
 @media (max-width: 460px) {
   .q-theme-btn span,
   .q-logout-btn span,
+  .q-install-btn span,
   .q-nav-spacer span {
     display: none;
   }
 
   .q-theme-btn,
-  .q-logout-btn {
+  .q-logout-btn,
+  .q-install-btn {
     width: 46px;
     padding: 0;
   }

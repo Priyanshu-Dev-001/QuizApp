@@ -81,6 +81,22 @@ const applyResultFilters = (filters = {}) => {
     conditions.push({ examDay: filters.day });
   }
 
+  if (filters.subject) {
+    conditions.push({ subject: filters.subject });
+  }
+
+  if (filters.set) {
+    conditions.push({ set: filters.set });
+  }
+
+  if (filters.username) {
+    conditions.push({ username: new RegExp(filters.username, "i") });
+  }
+
+  if (filters.userId) {
+    conditions.push({ userId: filters.userId });
+  }
+
   return conditions.length ? { $and: conditions } : {};
 };
 
@@ -88,22 +104,34 @@ exports.saveResult = async (req, res) => {
   try {
     const {
       username,
+      userId,
+      quizId,
       title,
       subject,
+      set,
       score,
       total,
       examDate,
       examDay,
+      duration,
+      timeSpent,
+      answers,
     } = req.body;
 
     const result = new Result({
+      userId: userId || null,
+      quizId: quizId || null,
       username,
       title,
       subject,
+      set: set || "Set 1",
       score,
       total,
       examDate: examDate || null,
       examDay: examDay || getDayName(examDate),
+      duration: Number(duration) || 60,
+      timeSpent: Number(timeSpent) || 0,
+      answers: Array.isArray(answers) ? answers : [],
     });
 
     await result.save();

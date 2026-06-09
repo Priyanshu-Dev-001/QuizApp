@@ -19,6 +19,7 @@ import {
   YAxis,
 } from "recharts";
 import { getSubjectOptions } from "../utils/subjects";
+import QuizCopilot from "../components/QuizCopilot";
 
 export default function Leaderboard() {
   const [rawResults, setRawResults] = useState([]);
@@ -34,7 +35,7 @@ export default function Leaderboard() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/results");
+        const res = await axios.get("/api/results");
         setRawResults(res.data || []);
       } catch (err) {
         console.log(err);
@@ -282,6 +283,9 @@ export default function Leaderboard() {
           </BarChart>
         </ResponsiveContainer>
       </section>
+
+      {/* Supportive AI Study Companion */}
+      <QuizCopilot />
     </div>
   );
 }

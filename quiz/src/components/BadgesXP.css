@@ -1,0 +1,46 @@
+.bxp-card {
+  background: var(--card, #fff);
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+body[data-theme="dark"] .bxp-card { background:#1e293b; border-color:#334155; }
+
+.bxp-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.bxp-title { font-size:17px; font-weight:700; color:var(--head,#0f172a); margin:0 0 2px; display:flex; align-items:center; gap:8px; }
+body[data-theme="dark"] .bxp-title { color:#f8fafc; }
+.bxp-sub { font-size:12px; color:var(--muted,#64748b); margin:0; }
+body[data-theme="dark"] .bxp-sub { color:#94a3b8; }
+.bxp-streak { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:#ef4444; background:rgba(239,68,68,.1); padding:7px 14px; border-radius:20px; border:1.5px solid rgba(239,68,68,.2); white-space:nowrap; }
+
+/* XP */
+.bxp-xp-section { display:flex; flex-direction:column; gap:8px; }
+.bxp-xp-top { display:flex; align-items:center; justify-content:space-between; }
+.bxp-level-badge { font-size:12px; font-weight:700; padding:4px 12px; border-radius:20px; border:1.5px solid; }
+.bxp-xp-val { display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#6366f1; }
+.bxp-xp-track { height:10px; background:#e2e8f0; border-radius:99px; overflow:hidden; }
+body[data-theme="dark"] .bxp-xp-track { background:#334155; }
+.bxp-xp-fill { height:100%; border-radius:99px; transition:width .8s cubic-bezier(.34,1.56,.64,1); }
+.bxp-xp-next { font-size:11.5px; color:#94a3b8; font-weight:600; }
+
+/* BADGES */
+.bxp-badges-label { font-size:13px; font-weight:700; color:#64748b; }
+body[data-theme="dark"] .bxp-badges-label { color:#94a3b8; }
+.bxp-badges-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:10px; }
+.bxp-badge { display:flex; flex-direction:column; align-items:center; gap:7px; padding:12px 8px; border-radius:14px; border:1.5px solid #e2e8f0; background:#f8fafc; cursor:default; transition:all .2s; }
+body[data-theme="dark"] .bxp-badge { background:#0f172a; border-color:#334155; }
+.bxp-badge.earned { border-color:rgba(99,102,241,.3); box-shadow:0 4px 12px rgba(0,0,0,.06); }
+.bxp-badge.locked { opacity:.4; filter:grayscale(1); }
+.bxp-badge-icon { width:38px; height:38px; border-radius:10px; background:#e2e8f0; color:#94a3b8; display:flex; align-items:center; justify-content:center; }
+body[data-theme="dark"] .bxp-badge-icon { background:#334155; }
+.bxp-badge-label { font-size:10.5px; font-weight:700; color:#64748b; text-align:center; line-height:1.3; }
+body[data-theme="dark"] .bxp-badge-label { color:#94a3b8; }
+.bxp-badge.earned .bxp-badge-label { color:#1e293b; }
+body[data-theme="dark"] .bxp-badge.earned .bxp-badge-label { color:#f1f5f9; }
+
+/* COMPACT */
+.bxp-compact { display:flex; align-items:center; gap:10px; }
+.bxp-compact-xp { display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#6366f1; background:rgba(99,102,241,.1); padding:5px 12px; border-radius:20px; }
+.bxp-compact-level { font-size:12px; font-weight:700; }
+.bxp-compact-streak { display:flex; align-items:center; gap:4px; font-size:12px; font-weight:700; color:#ef4444; }

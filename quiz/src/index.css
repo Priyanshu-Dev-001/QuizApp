@@ -1,0 +1,249 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+body {
+  min-width: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+  touch-action: manipulation;
+}
+
+* {
+  min-width: 0;
+}
+
+@media (max-width: 640px), (hover: none) and (pointer: coarse) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .layout .sidebar {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--side-border, rgba(20, 33, 61, 0.12));
+  }
+
+  .layout .main {
+    width: 100%;
+    min-height: 100vh;
+    margin-left: 0;
+  }
+
+  .layout .content {
+    padding: 12px;
+  }
+
+  .layout h1,
+  .layout h2,
+  .home-container h1,
+  .feat-container h1,
+  .contact-page h1,
+  .login-page h1,
+  .register-page h1,
+  .register-page h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .q-navbar {
+    min-height: auto;
+    padding: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .q-nav-spacer,
+  .q-nav-actions {
+    width: 100%;
+  }
+
+  .q-nav-actions {
+    justify-content: flex-end;
+  }
+
+  .home-container .home-header,
+  .feat-container .feat-header {
+    padding: 14px;
+    flex-wrap: wrap;
+  }
+
+  .home-container .nav-links,
+  .feat-container .feat-nav {
+    display: none;
+  }
+
+  .home-container .auth-buttons,
+  .feat-container .feat-header-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-container .theme-toggle-btn,
+  .feat-container .feat-theme-btn {
+    grid-column: 1 / -1;
+  }
+
+  .home-container .hero-section,
+  .home-container .features-section,
+  .home-container .subjects-section,
+  .home-container .stats-section,
+  .home-container .reviews-section,
+  .home-container .cta-section,
+  .home-container .why-section,
+  .feat-hero,
+  .feat-main-section,
+  .feat-quick-section,
+  .feat-cta-section,
+  .contact-page {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .home-container .hero-left h1,
+  .feat-hero h1,
+  .contact-page h1 {
+    font-size: clamp(2.35rem, 12vw, 3.25rem) !important;
+    line-height: 1.04;
+  }
+
+  .home-container .section-heading h2,
+  .feat-section-heading h2,
+  .contact-page h2 {
+    font-size: clamp(1.9rem, 9vw, 2.6rem) !important;
+  }
+
+  .teacher-layout,
+  .quiz-select,
+  .results-hero,
+  .leaderboard-hero,
+  .settings-hero,
+  .student-page .student-hero,
+  .contact-hero,
+  .input-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .teacher-page,
+  .quiz-page,
+  .results-page,
+  .leaderboard-page,
+  .settings-page,
+  .student-page {
+    gap: 16px;
+  }
+
+  .teacher-page {
+    padding: 14px;
+  }
+
+  .teacher-header,
+  .attempt-header,
+  .result-card-head,
+  .settings-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .summary-grid,
+  .result-stats,
+  .leaderboard-summary,
+  .result-filters,
+  .filter-bar,
+  .settings-grid,
+  .settings-actions,
+  .subject-panel,
+  .options-grid,
+  .quiz-options-grid,
+  .login-mini-stats,
+  .register-page .preview-stats,
+  .register-page .register-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .table-card,
+  .leaderboard-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-head,
+  .table-row {
+    min-width: 720px;
+  }
+
+  .login-page,
+  .register-page {
+    padding: 72px 12px 12px;
+  }
+
+  .login-shell,
+  .register-page .register-wrapper {
+    border-radius: 20px;
+  }
+
+  .login-panel,
+  .login-preview,
+  .register-page .register-panel,
+  .register-page .register-preview {
+    padding: 22px;
+  }
+
+  .login-orb,
+  .register-page .bg-orb,
+  .q-nav-glow,
+  .quiz-side-glow {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .q-theme-btn span,
+  .q-logout-btn span,
+  .q-nav-spacer span {
+    display: none;
+  }
+
+  .q-theme-btn,
+  .q-logout-btn {
+    width: 44px;
+    padding: 0;
+  }
+}

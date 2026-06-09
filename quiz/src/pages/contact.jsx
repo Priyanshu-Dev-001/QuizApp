@@ -25,7 +25,7 @@ export default function Contact() {
           </p>
 
           <h1>
-            Let’s build smarter
+            Let's build smarter
             <span> learning together.</span>
           </h1>
 

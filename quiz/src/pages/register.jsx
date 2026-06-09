@@ -144,7 +144,7 @@ export default function Register() {
 
       // 🔥 SEND DATA
       await axios.post(
-        "http://localhost:5000/api/users/register",
+        "/api/users/register",
         form
       );
 

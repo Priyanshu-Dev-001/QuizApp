@@ -1,0 +1,480 @@
+/* =========================
+   FLASHCARDS — LIGHT MODE
+========================= */
+.flashcards-page {
+  --fc-bg: #f6f7fb;
+  --fc-surface: #ffffff;
+  --fc-ink: #14213d;
+  --fc-heading: #10203f;
+  --fc-muted: #607089;
+  --fc-line: #dfe5ee;
+  --fc-brand: #6366f1;
+  --fc-brand-dark: #4f46e5;
+  --fc-accent: #06b6d4;
+  --fc-shadow: 0 18px 50px rgba(20, 33, 61, 0.1);
+  --fc-card-glow: rgba(99, 102, 241, 0.15);
+}
+
+/* =========================
+   FLASHCARDS — DARK MODE
+========================= */
+body[data-theme="dark"] .flashcards-page {
+  --fc-bg: #0f172a;
+  --fc-surface: #111c32;
+  --fc-ink: #e5edf9;
+  --fc-heading: #f1f5fb;
+  --fc-muted: #9fb0c8;
+  --fc-line: #26354f;
+  --fc-brand: #818cf8;
+  --fc-brand-dark: #6366f1;
+  --fc-accent: #22d3ee;
+  --fc-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  --fc-card-glow: rgba(129, 140, 248, 0.2);
+}
+
+/* =========================
+   BASE LAYOUT
+========================= */
+.flashcards-page {
+  display: grid;
+  gap: 24px;
+  min-height: 100%;
+  color: var(--fc-ink);
+}
+
+.flashcards-page *,
+.flashcards-page *::before,
+.flashcards-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================
+   HERO / INPUT CARD
+========================= */
+.fc-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 24px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 44px);
+  border: 1px solid var(--fc-line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12), transparent 30%),
+    linear-gradient(135deg, var(--fc-surface) 0%, #f0f4ff 100%);
+  box-shadow: var(--fc-shadow);
+}
+
+body[data-theme="dark"] .fc-hero {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(129, 140, 248, 0.12), transparent 30%),
+    linear-gradient(135deg, #111c32 0%, #0f172a 100%);
+}
+
+.fc-eyebrow {
+  margin: 0 0 12px;
+  color: var(--fc-brand);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fc-hero h1 {
+  margin: 0 0 16px;
+  color: var(--fc-heading);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height: 1.05;
+}
+
+.fc-hero p {
+  margin: 0;
+  color: var(--fc-muted);
+  line-height: 1.65;
+}
+
+/* Generator Form Card */
+.fc-generator-card {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  background: var(--fc-surface);
+  border: 1px solid var(--fc-line);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+}
+
+body[data-theme="dark"] .fc-generator-card {
+  background: #0f172a;
+}
+
+.fc-input-group {
+  display: grid;
+  gap: 8px;
+}
+
+.fc-input-group label {
+  font-size: 0.8rem;
+  font-weight: 850;
+  color: var(--fc-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fc-input-group input {
+  min-height: 48px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--fc-line);
+  background: var(--fc-surface);
+  color: var(--fc-ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fc-input-group input:focus {
+  border-color: var(--fc-brand);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.fc-gen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border: none;
+  border-radius: 10px;
+  padding: 0 20px;
+  background: linear-gradient(135deg, var(--fc-brand), var(--fc-brand-dark));
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.fc-gen-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(99, 102, 241, 0.3);
+}
+
+.fc-gen-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================
+   FLASHCARD PLAYGROUND
+========================= */
+.fc-playground {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 620px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 3D Scene Wrapper */
+.fc-card-container {
+  perspective: 1200px;
+  width: 100%;
+  aspect-ratio: 1.6 / 1;
+  min-height: 280px;
+  cursor: pointer;
+}
+
+/* The Flipper element */
+.fc-card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Trigger flip */
+.fc-card-container.flipped .fc-card-flipper {
+  transform: rotateY(180deg);
+}
+
+/* Card faces: Front & Back */
+.fc-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid var(--fc-line);
+  border-radius: 24px;
+  padding: clamp(20px, 4vw, 36px);
+  background: var(--fc-surface);
+  box-shadow: var(--fc-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+body[data-theme="dark"] .fc-card-face {
+  background: rgba(17, 28, 50, 0.92);
+}
+
+/* Front Face */
+.fc-card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+  border-left: 6px solid var(--fc-brand);
+}
+
+.fc-card-front .fc-card-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--fc-brand);
+  background: rgba(99, 102, 241, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.fc-term-text {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 950;
+  color: var(--fc-heading);
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+
+.fc-flip-hint {
+  position: absolute;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 850;
+  color: var(--fc-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Back Face */
+.fc-card-back {
+  transform: rotateY(180deg);
+  border-left: 6px solid var(--fc-accent);
+}
+
+.fc-card-back .fc-card-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--fc-accent);
+  background: rgba(6, 182, 212, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.fc-definition-text {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--fc-heading);
+  margin: 0 0 20px;
+}
+
+.fc-context-text {
+  font-size: 0.88rem;
+  color: var(--fc-muted);
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px dashed var(--fc-line);
+  max-width: 90%;
+}
+
+body[data-theme="dark"] .fc-context-text {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* =========================
+   CONTROLS BAR
+========================= */
+.fc-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+.fc-counter {
+  font-size: 0.88rem;
+  font-weight: 850;
+  color: var(--fc-muted);
+  letter-spacing: 0.04em;
+}
+
+.fc-nav-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.fc-nav-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--fc-line);
+  border-radius: 12px;
+  background: var(--fc-surface);
+  color: var(--fc-ink);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fc-nav-btn:hover {
+  border-color: var(--fc-brand);
+  color: var(--fc-brand);
+  transform: translateY(-1px);
+}
+
+.fc-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  border-color: var(--fc-line);
+  color: var(--fc-muted);
+}
+
+.fc-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  border: 1px solid var(--fc-line);
+  border-radius: 10px;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--fc-muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fc-reset-btn:hover {
+  color: var(--fc-brand);
+  border-color: var(--fc-brand);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+/* =========================
+   EMPTY & LOADING STATES
+========================= */
+.fc-empty-state {
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  padding: 48px;
+  border-radius: 20px;
+  border: 2px dashed var(--fc-line);
+  background: rgba(255,255,255,0.01);
+  text-align: center;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.fc-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--fc-brand);
+}
+
+.fc-empty-state h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--fc-heading);
+}
+
+.fc-empty-state p {
+  margin: 0;
+  color: var(--fc-muted);
+  line-height: 1.6;
+}
+
+/* Loading Panel */
+.fc-loading-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 280px;
+  border: 1px solid var(--fc-line);
+  border-radius: 24px;
+  width: 100%;
+  background: var(--fc-surface);
+  box-shadow: var(--fc-shadow);
+}
+
+body[data-theme="dark"] .fc-loading-panel {
+  background: rgba(17, 28, 50, 0.92);
+}
+
+.fc-spinner {
+  color: var(--fc-brand);
+  animation: fc-spin 1s linear infinite;
+}
+
+.fc-loading-panel p {
+  color: var(--fc-muted);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+@keyframes fc-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 760px) {
+  .fc-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .fc-hero,
+  .fc-card-face {
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .fc-card-container {
+    aspect-ratio: 1.3 / 1;
+  }
+
+  .fc-context-text {
+    max-width: 100%;
+    font-size: 0.8rem;
+  }
+}

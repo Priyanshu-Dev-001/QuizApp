@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Eye, EyeOff, Bot } from "lucide-react";
 import axios from "axios";
 import {
   PROFILE_UPDATED_EVENT,
@@ -15,6 +16,8 @@ const defaultSettings = {
   reminders: true,
   showHints: false,
   difficulty: "Medium",
+  geminiApiKey: "",
+  aiPersonality: "Friendly Tutor",
 };
 
 const defaultProfile = {
@@ -55,13 +58,14 @@ export default function Settings() {
   const [profile, setProfile] = useState(getInitialProfile);
   const [settings, setSettings] = useState(getInitialSettings);
   const [saved, setSaved] = useState(false);
+  const [showApiKey, setShowApiKey] = useState(false);
 
   useEffect(() => {
     const storedUser = readStoredUser();
 
     if (storedUser?._id) {
       axios
-        .get(`http://localhost:5000/api/profile/${storedUser._id}`)
+        .get(`/api/profile/${storedUser._id}`)
         .then((res) => {
           const syncedProfile = saveProfileSnapshot(
             {
@@ -214,6 +218,61 @@ export default function Settings() {
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
+            </select>
+          </label>
+        </article>
+
+        <article className="settings-panel wide">
+          <div className="panel-head">
+            <span>AI Companion</span>
+            <h2>
+              QuizCopilot Configuration
+              <span className="ai-panel-badge">
+                <Bot size={14} /> AI
+              </span>
+            </h2>
+          </div>
+
+          <label className="setting-field">
+            Gemini API Key
+            <div className="ai-key-field">
+              <input
+                type={showApiKey ? "text" : "password"}
+                value={settings.geminiApiKey}
+                onChange={(e) => updateSetting("geminiApiKey", e.target.value)}
+                placeholder="Enter your Gemini API key"
+              />
+              <button
+                type="button"
+                className="ai-key-toggle"
+                onClick={() => setShowApiKey((v) => !v)}
+                aria-label={showApiKey ? "Hide API key" : "Show API key"}
+              >
+                {showApiKey ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+            <p className="ai-helper-text">
+              Get your free API key from{" "}
+              <a
+                href="https://aistudio.google.com/app/apikey"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Google AI Studio
+              </a>
+              . QuizCopilot works offline too with built-in smart responses!
+            </p>
+          </label>
+
+          <label className="setting-field">
+            AI Personality
+            <select
+              value={settings.aiPersonality}
+              onChange={(e) => updateSetting("aiPersonality", e.target.value)}
+            >
+              <option>Friendly Tutor</option>
+              <option>Strict Mentor</option>
+              <option>Fun Coach</option>
             </select>
           </label>
         </article>

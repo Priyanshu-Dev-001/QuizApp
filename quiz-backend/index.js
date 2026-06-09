@@ -12,13 +12,19 @@ const teacherQuizRoutes = require("./routes/teacherQuiz.routes");
 // ✅ NEW PROFILE ROUTE
 const profileRoutes = require("./routes/profileRoutes");
 
+// 🤖 NEW AI ROUTE
+const aiRoutes = require("./routes/aiRoutes");
+
+// 👥 STUDY GROUPS ROUTE
+const studyGroupRoutes = require("./routes/studyGroup.routes");
+
 const app = express();
 
 // ===============================
 // ✅ MIDDLEWARE
 // ===============================
 app.use(cors());
-app.use(express.json({ limit: "10mb" })); // 🔥 for image upload
+app.use(express.json({ limit: "10mb" }));
 
 // ===============================
 // ✅ HEALTH CHECK
@@ -34,7 +40,6 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => {
     console.log("❌ DB Error:", err.message);
-    process.exit(1);
   });
 
 // ===============================
@@ -47,6 +52,12 @@ app.use("/api/results", resultRoutes);
 
 // 🔥 NEW PROFILE ROUTE
 app.use("/api/profile", profileRoutes);
+
+// 🤖 NEW AI ROUTE
+app.use("/api/ai", aiRoutes);
+
+// 👥 STUDY GROUPS ROUTE
+app.use("/api/groups", studyGroupRoutes);
 
 // ===============================
 // ❌ 404 HANDLER
@@ -66,7 +77,7 @@ app.use((err, req, res, next) => {
 // ===============================
 // ✅ SERVER START
 // ===============================
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

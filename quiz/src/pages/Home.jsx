@@ -32,6 +32,8 @@ import {
   Award,
   Moon,
   Sun,
+  Menu,
+  X,
 } from "lucide-react";
 
 import "./home.css";
@@ -114,6 +116,7 @@ const readSavedSettings = () => {
 export default function Home() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState(readSavedTheme);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.body.dataset.theme = theme;
@@ -142,16 +145,28 @@ export default function Home() {
           <span>QuizApp</span>
         </button>
 
-        <nav className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#subjects">Subjects</a>
-          <a href="#reviews">Reviews</a>
+        <button
+          className="home-menu-btn"
+          onClick={() => setMenuOpen((open) => !open)}
+          type="button"
+        >
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          Menu
+        </button>
+
+        <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+          <a href="#subjects" onClick={() => setMenuOpen(false)}>Subjects</a>
+          <a href="#reviews" onClick={() => setMenuOpen(false)}>Reviews</a>
           
 
           {/* ✅ Features page link added in header */}
           <button
             className="contact-nav-btn"
-            onClick={() => navigate("/features")}
+            onClick={() => {
+              setMenuOpen(false);
+              navigate("/features");
+            }}
             type="button"
           >
             All Features
@@ -159,11 +174,29 @@ export default function Home() {
 
           <button
             className="contact-nav-btn"
-            onClick={() => navigate("/contact")}
+            onClick={() => {
+              setMenuOpen(false);
+              navigate("/contact");
+            }}
             type="button"
           >
             Contact
           </button>
+
+          <div className="menu-auth-group">
+            <button className="theme-toggle-btn" onClick={() => { setMenuOpen(false); toggleTheme(); }} type="button">
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              {theme === "dark" ? "Light" : "Dark"}
+            </button>
+
+            <button className="login-btn" onClick={() => { setMenuOpen(false); navigate("/login"); }}>
+              Login
+            </button>
+
+            <button className="register-btn" onClick={() => { setMenuOpen(false); navigate("/register"); }}>
+              Register
+            </button>
+          </div>
         </nav>
 
         <div className="auth-buttons">
@@ -350,9 +383,6 @@ export default function Home() {
 
         <div className="why-right">
           <div className="why-card">
-            <div className="floating-icon crown"><Crown size={24} /></div>
-            <div className="floating-icon medal"><Medal size={24} /></div>
-            <div className="floating-icon star"><Star size={24} /></div>
             <h3>Weekly Leaderboard</h3>
             <div className="chart-area">
               <div className="bar bar1"></div>

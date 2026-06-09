@@ -72,9 +72,48 @@ const applyScheduleFilters = (query, filters = {}) => {
   return { ...query, $and: conditions };
 };
 
+const applyTextFilters = (query, filters = {}) => {
+  const conditions = [];
+
+  if (filters.subject) {
+    conditions.push({
+      subject: new RegExp(`^${escapeRegExp(normalizeSubject(filters.subject))}$`, "i"),
+    });
+  }
+
+  if (filters.set) {
+    conditions.push({ set: filters.set });
+  }
+
+  if (filters.search) {
+    const search = new RegExp(escapeRegExp(filters.search), "i");
+    conditions.push({
+      $or: [
+        { title: search },
+        { subject: search },
+        { set: search },
+        { "questions.question": search },
+      ],
+    });
+  }
+
+  if (!conditions.length) return query;
+  return { ...query, $and: [...(query.$and || []), ...conditions] };
+};
+
 exports.createQuiz = async (req, res) => {
   try {
-    const { title, subject, questions, createdBy, examDate, set } = req.body;
+    const {
+      title,
+      subject,
+      questions,
+      createdBy,
+      examDate,
+      set,
+      startAt,
+      endAt,
+      duration,
+    } = req.body;
     const normalizedSubject = normalizeSubject(subject);
 
     if (!title || !normalizedSubject || !questions?.length || !createdBy) {
@@ -91,6 +130,9 @@ exports.createQuiz = async (req, res) => {
       createdBy,
       examDate: examDate || new Date(),
       examDay: getDayName(examDate),
+      startAt: startAt || null,
+      endAt: endAt || null,
+      duration: Number(duration) || 60,
     });
 
     await quiz.save();
@@ -102,7 +144,7 @@ exports.createQuiz = async (req, res) => {
 
 exports.getQuizzes = async (req, res) => {
   try {
-    const query = applyScheduleFilters({}, req.query);
+    const query = applyTextFilters(applyScheduleFilters({}, req.query), req.query);
     const quizzes = await Quiz.find(query).sort({ createdAt: -1 });
     res.json(quizzes);
   } catch (err) {
@@ -127,10 +169,10 @@ exports.getQuizBySubject = async (req, res) => {
 exports.getTeacherQuizzes = async (req, res) => {
   try {
     const { teacherId } = req.params;
-    const query = applyScheduleFilters(
+    const query = applyTextFilters(applyScheduleFilters(
       { $or: [{ createdBy: teacherId }, { createdBy: null }] },
       req.query
-    );
+    ), req.query);
     const quizzes = await Quiz.find(query).sort({ createdAt: -1 });
     res.json(quizzes);
   } catch (err) {
@@ -159,7 +201,17 @@ exports.deleteQuiz = async (req, res) => {
 exports.updateQuiz = async (req, res) => {
   try {
     const { id } = req.params;
-    const { userId, examDate } = req.body;
+    const {
+      userId,
+      title,
+      subject,
+      set,
+      questions,
+      examDate,
+      startAt,
+      endAt,
+      duration,
+    } = req.body;
     const quiz = await Quiz.findById(id);
 
     if (!quiz) return res.status(404).json({ message: "Quiz not found" });
@@ -167,18 +219,37 @@ exports.updateQuiz = async (req, res) => {
     if (quiz.createdBy?.toString() !== userId)
       return res.status(403).json({ message: "Not authorized" });
 
-    const updated = await Quiz.findByIdAndUpdate(
-      id,
-      {
-        ...req.body,
-        ...(req.body.subject ? { subject: normalizeSubject(req.body.subject) } : {}),
-        ...(req.body.set ? { set: req.body.set.trim() } : {}),
-        ...(examDate ? { examDay: getDayName(examDate) } : {}),
-      },
-      { new: true }
-    );
+    const updatePayload = {};
+
+    if (title !== undefined) updatePayload.title = title.trim();
+    if (subject !== undefined) updatePayload.subject = normalizeSubject(subject);
+    if (set !== undefined) updatePayload.set = set.trim() || "Set 1";
+    if (questions !== undefined) updatePayload.questions = questions;
+    if (examDate !== undefined) {
+      updatePayload.examDate = examDate || new Date();
+      updatePayload.examDay = getDayName(examDate);
+    }
+    if (startAt !== undefined) updatePayload.startAt = startAt || null;
+    if (endAt !== undefined) updatePayload.endAt = endAt || null;
+    if (duration !== undefined) updatePayload.duration = Number(duration) || 60;
+
+    const updated = await Quiz.findByIdAndUpdate(id, updatePayload, {
+      new: true,
+      runValidators: true,
+    });
 
     res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getQuizById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const quiz = await Quiz.findById(id);
+    if (!quiz) return res.status(404).json({ message: "Quiz not found" });
+    res.json(quiz);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

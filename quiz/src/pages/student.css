@@ -534,3 +534,276 @@ body[data-theme="dark"] .student-page .student-card h2 {
     padding: 24px;
   }
 }
+
+/* ==================================
+   LEVELS, STREAKS & BADGES STYLING
+================================== */
+.level-status-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin: 22px 0;
+  max-width: 600px;
+}
+
+body[data-theme="dark"] .level-status-card {
+  background: rgba(17, 24, 39, 0.35);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  min-width: 58px;
+  height: 58px;
+  box-shadow: 0 8px 18px rgba(217, 119, 6, 0.3);
+}
+
+.level-badge span {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+
+.level-badge strong {
+  font-size: 20px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.xp-bar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.xp-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 850;
+  color: var(--student-muted);
+}
+
+body[data-theme="dark"] .xp-bar-labels {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.sparkle-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--student-brand);
+}
+
+.xp-progress-track {
+  height: 8px;
+  background: rgba(99, 102, 241, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+body[data-theme="dark"] .xp-progress-track {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.xp-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--student-brand) 0%, var(--student-accent) 100%);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.streak-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 12px;
+  padding: 8px 16px;
+  color: #f59e0b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.flame-icon {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
+}
+
+.achievements-section {
+  display: grid;
+  gap: 16px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 950;
+  color: var(--student-heading);
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.badge-card {
+  position: relative;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid var(--student-line);
+  background: var(--student-surface);
+  box-shadow: var(--student-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--student-shadow-strong);
+}
+
+.badge-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  top: -70px;
+  pointer-events: none;
+  filter: blur(28px);
+  opacity: 0.15;
+}
+
+.badge-icon {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.badge-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--student-heading);
+}
+
+.badge-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--student-muted);
+  line-height: 1.4;
+}
+
+/* Badge specific color schemes */
+.badge-card.gold .badge-icon { color: #f59e0b; }
+.badge-card.gold .badge-glow { background: #f59e0b; }
+.badge-card.purple .badge-icon { color: #8b5cf6; }
+.badge-card.purple .badge-glow { background: #8b5cf6; }
+.badge-card.emerald .badge-icon { color: #10b981; }
+.badge-card.emerald .badge-glow { background: #10b981; }
+.badge-card.orange .badge-icon { color: #f97316; }
+.badge-card.orange .badge-glow { background: #f97316; }
+
+.orange-text {
+  color: #f97316;
+}
+
+@media (max-width: 600px) {
+  .level-status-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+  }
+  
+  .level-badge {
+    align-self: center;
+  }
+  
+  .hero-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .streak-indicator {
+    justify-content: center;
+  }
+}
+
+
+/* =========================
+   NEW FEATURE CARD HIGHLIGHT
+========================= */
+.student-page .student-card--new {
+  border-color: rgba(99, 102, 241, 0.35);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(6, 182, 212, 0.04) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.student-page .student-card--new::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #06b6d4);
+  border-radius: 20px 20px 0 0;
+}
+
+.student-page .student-card--new:hover {
+  border-color: #6366f1;
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.18);
+}
+
+body[data-theme="dark"] .student-page .student-card--new {
+  border-color: rgba(129, 140, 248, 0.25);
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.08) 0%, rgba(34, 211, 238, 0.04) 100%);
+}
+
+/* =========================
+   BADGES XP + EXAM COUNTDOWN ROW
+========================= */
+.bxp-ec-row {
+  grid-template-columns: 1fr 320px !important;
+}
+@media (max-width: 768px) {
+  .bxp-ec-row {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -1,0 +1,184 @@
+/* =========================
+   NOTIFICATION BELL
+========================= */
+.notif-wrapper {
+  position: relative;
+}
+
+.notif-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.notif-btn:hover {
+  background: rgba(99, 102, 241, 0.16);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  animation: popIn 0.3s ease;
+}
+
+body[data-theme="dark"] .notif-badge { border-color: #111c32; }
+
+@keyframes popIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 340px;
+  background: #ffffff;
+  border: 1px solid #dfe5ee;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(20, 33, 61, 0.18);
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+}
+
+body[data-theme="dark"] .notif-dropdown {
+  background: #111c32;
+  border-color: #26354f;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid #dfe5ee;
+}
+
+body[data-theme="dark"] .notif-header { border-color: #26354f; }
+
+.notif-header h3 {
+  font-size: 14px;
+  font-weight: 800;
+  color: #10203f;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+body[data-theme="dark"] .notif-header h3 { color: #f1f5fb; }
+
+.notif-clear-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6366f1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.notif-clear-btn:hover { background: rgba(99, 102, 241, 0.1); }
+
+.notif-list { max-height: 360px; overflow-y: auto; }
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0f2f7;
+  transition: background 0.15s;
+  cursor: default;
+}
+
+body[data-theme="dark"] .notif-item { border-color: #1e2d47; }
+
+.notif-item:hover { background: rgba(99, 102, 241, 0.04); }
+.notif-item.unread { background: rgba(99, 102, 241, 0.06); }
+body[data-theme="dark"] .notif-item.unread { background: rgba(129, 140, 248, 0.08); }
+
+.notif-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notif-icon.fire { background: rgba(249, 115, 22, 0.15); }
+.notif-icon.trophy { background: rgba(234, 179, 8, 0.15); }
+.notif-icon.sparkle { background: rgba(99, 102, 241, 0.12); }
+.notif-icon.book { background: rgba(16, 185, 129, 0.12); }
+
+.notif-content { flex: 1; min-width: 0; }
+.notif-content strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #14213d;
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+body[data-theme="dark"] .notif-content strong { color: #e5edf9; }
+
+.notif-content span { font-size: 12px; color: #607089; }
+body[data-theme="dark"] .notif-content span { color: #9fb0c8; }
+
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: #6366f1;
+  margin-top: 6px;
+}
+
+.notif-empty {
+  padding: 32px 18px;
+  text-align: center;
+  color: #607089;
+  font-size: 13px;
+}
+
+body[data-theme="dark"] .notif-empty { color: #9fb0c8; }
+.notif-empty p { margin: 8px 0 0; }
+
+@media (max-width: 420px) {
+  .notif-dropdown { width: 300px; right: -50px; }
+}

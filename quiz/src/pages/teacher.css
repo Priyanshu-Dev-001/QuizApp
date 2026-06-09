@@ -207,6 +207,68 @@ body[data-theme="dark"] .teacher-page {
   line-height: 1.5;
 }
 
+.schedule-note span {
+  display: block;
+  margin-top: 4px;
+}
+
+.time-grid,
+.inline-control,
+.bank-controls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.subject-manager,
+.chip-list {
+  display: grid;
+  gap: 10px;
+}
+
+.inline-control button,
+.subject-chip button,
+.bank-row button {
+  min-height: 42px;
+  border: 1px solid var(--t-line);
+  border-radius: 10px;
+  padding: 0 12px;
+  color: var(--t-btn-secondary-color);
+  background: var(--t-btn-secondary-bg);
+  font-weight: 850;
+}
+
+.subject-chip,
+.bank-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--t-line);
+  border-radius: 12px;
+  background: var(--t-surface-nested);
+}
+
+.subject-chip span,
+.bank-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--t-ink);
+  font-weight: 800;
+}
+
+.subject-chip input {
+  min-height: 42px;
+}
+
+.bank-row button:last-child,
+.subject-chip button:last-child {
+  color: var(--t-danger);
+}
+
 /* =========================
    BUTTONS — PRIMARY
 ========================= */
@@ -382,6 +444,27 @@ body[data-theme="dark"] .summary-grid div:nth-child(2) {
   color: var(--t-ink);
   font-size: clamp(1.35rem, 3vw, 2rem);
   line-height: 1.2;
+}
+
+.question-tools {
+  display: grid;
+  grid-template-columns: minmax(140px, 180px) minmax(120px, 150px) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.question-tools select {
+  min-height: 40px;
+  border: 1px solid var(--t-line);
+  border-radius: 10px;
+  padding: 0 12px;
+  color: var(--t-ink);
+  background: var(--t-input-bg);
+  font-weight: 800;
+}
+
+.short-answer-box {
+  margin-top: 18px;
 }
 
 /* =========================
@@ -605,6 +688,14 @@ body[data-theme="dark"] .red {
     flex-direction: column;
   }
 
+  .question-tools,
+  .time-grid,
+  .inline-control,
+  .bank-controls {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
   .remove-btn,
   .header-action {
     width: 100%;
@@ -619,3 +710,116 @@ body[data-theme="dark"] .red {
     justify-self: end;
   }
 }
+
+/* ==================================
+   PREMIUM CHARTS & 9-COLUMN STYLES
+================================== */
+.teacher-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+}
+
+.teacher-chart-card {
+  border: 1px solid var(--t-line);
+  border-radius: 16px;
+  background: var(--t-surface);
+  box-shadow: var(--t-shadow);
+  padding: 24px;
+  backdrop-filter: blur(18px);
+  position: relative;
+  overflow: hidden;
+}
+
+body[data-theme="dark"] .teacher-chart-card {
+  border-color: var(--t-line);
+  background: rgba(17, 28, 50, 0.95);
+}
+
+.teacher-chart-card h3 {
+  margin: 0 0 16px;
+  color: var(--t-ink);
+  font-size: 1.25rem;
+  font-weight: 950;
+}
+
+.chart-meta {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--t-brand);
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* 9 Columns Table Layout */
+.table-head-9,
+.table-row-9 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 90px 140px 80px 80px 80px 80px 70px;
+  gap: 8px;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 18px;
+  min-width: 860px; /* prevents wrapping on narrow screens */
+}
+
+.table-head-9 {
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 16px 16px 0 0;
+}
+
+body[data-theme="dark"] .table-head-9 {
+  background: #0a1628;
+}
+
+.table-row-9 {
+  border-top: 1px solid var(--t-line);
+  color: var(--t-ink);
+  font-weight: 600;
+  background: var(--t-surface);
+  transition: background 0.15s ease;
+}
+
+.table-row-9:nth-child(even) {
+  background: var(--t-row-even);
+}
+
+.table-row-9:hover {
+  background: var(--t-row-hover);
+}
+
+.set-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--t-brand);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  width: fit-content;
+}
+
+body[data-theme="dark"] .set-tag {
+  background: rgba(129, 140, 248, 0.15);
+  color: #a5b4fc;
+}
+
+@media (max-width: 1040px) {
+  .teacher-charts-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+

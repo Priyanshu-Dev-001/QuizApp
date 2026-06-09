@@ -22,6 +22,9 @@ import {
   readStoredUser,
   saveProfileSnapshot,
 } from "../utils/profileSync";
+import PwaInstallButton from "./PwaInstallButton";
+import NotificationBell from "./NotificationBell";
+import { showToast } from "../utils/toast";
 import "./nav.css";
 
 const defaultProfile = {
@@ -62,7 +65,7 @@ export default function Navbar({ logout }) {
 
     if (storedUser?._id) {
       axios
-        .get(`http://localhost:5000/api/profile/${storedUser._id}`)
+        .get(`/api/profile/${storedUser._id}`)
         .then((res) => {
           const loadedProfile = {
             ...defaultProfile,
@@ -145,14 +148,14 @@ export default function Navbar({ logout }) {
 
   const saveProfile = async () => {
     if (!user?._id) {
-      alert("User not found");
+      showToast("User not found", "error");
       return;
     }
 
     try {
       setLoading(true);
 
-      const res = await axios.post("http://localhost:5000/api/profile", {
+      const res = await axios.post("/api/profile", {
         userId: user._id,
         ...profile,
       });
@@ -170,10 +173,10 @@ export default function Navbar({ logout }) {
       emitProfileUpdated(savedProfile);
 
       setProfileOpen(false);
-      alert("✅ Profile saved");
+      showToast("Profile saved", "success");
     } catch (err) {
       console.log("Save error:", err);
-      alert("❌ Error saving profile");
+      showToast("Error saving profile", "error");
     } finally {
       setLoading(false);
     }
@@ -196,6 +199,8 @@ export default function Navbar({ logout }) {
       <div className="q-nav-spacer" />
 
       <div className="q-nav-actions">
+        <NotificationBell />
+
         <button className="q-theme-btn" onClick={toggleTheme} type="button">
           {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
@@ -205,6 +210,8 @@ export default function Navbar({ logout }) {
           <LogOut size={18} />
           <span>Logout</span>
         </button>
+
+        <PwaInstallButton />
 
         <div className="q-profile-wrap" ref={profileRef}>
           <button

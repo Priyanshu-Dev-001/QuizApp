@@ -83,7 +83,7 @@ export default function Login({ setUser }) {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "/api/users/login",
         {
           username: form.username.trim(),
           password: form.password,
